@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Rayvee 🎉</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle at top, #0f172a, #000);
+color:white;
+}
+
+/* FIREWORK CANVAS */
+canvas{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+}
+
+/* MAIN CARD */
+.container{
+width:380px;
+max-width:92%;
+padding:20px;
+text-align:center;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 0 25px rgba(59,130,246,0.3);
+z-index:10;
+}
+
+/* TITLE */
+h1{
+font-size:26px;
+text-shadow:0 0 10px #60a5fa;
+}
+
+h2{
+color:#60a5fa;
+}
+
+.cake{
+font-size:70px;
+animation:bounce 2s infinite;
+}
+
+/* BUTTONS */
+button{
+width:100%;
+padding:10px;
+margin-top:8px;
+border:none;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+#btn1{background:#2563eb;color:white;}
+#btn2{background:transparent;color:#60a5fa;border:1px solid #60a5fa;}
+
+button:hover{transform:scale(1.05);}
+
+/* COUNTDOWN */
+.countdown{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:6px;
+margin-top:12px;
+}
+
+.countdown div{
+background:rgba(255,255,255,0.1);
+padding:6px;
+border-radius:10px;
+}
+
+.countdown span{
+font-size:18px;
+color:#60a5fa;
+font-weight:bold;
+}
+
+/* 🎇 4 PICS GALLERY */
+.gallery-title{
+margin-top:15px;
+font-size:14px;
+opacity:0.8;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+margin-top:10px;
+}
+
+.photo{
+width:100%;
+height:90px;
+border-radius:12px;
+overflow:hidden;
+cursor:pointer;
+border:2px solid rgba(96,165,250,0.4);
+transition:0.3s;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:0.3s;
+}
+
+.photo:hover img{
+transform:scale(1.2);
+}
+
+.photo:hover{
+box-shadow:0 0 15px #60a5fa;
+}
+
+/* POPUP IMAGE */
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popup img{
+width:90%;
+max-width:400px;
+border-radius:15px;
+box-shadow:0 0 20px #60a5fa;
+}
+
+/* 🎈 FLOATING MESSAGE */
+.floating-msg{
+position:absolute;
+color:rgba(96,165,250,0.8);
+font-weight:600;
+font-size:14px;
+animation:floatMsg 10s linear infinite;
+white-space:nowrap;
+pointer-events:none;
+text-shadow:0 0 10px #60a5fa;
+z-index:5;
+}
+
+@keyframes floatMsg{
+0%{
+transform:translateY(100vh) translateX(0);
+opacity:0;
+}
+10%{opacity:1;}
+100%{
+transform:translateY(-120vh) translateX(60px);
+opacity:0;
+}
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<!-- 🎈 FLOATING MESSAGES -->
+<div class="floating-msg" style="left:10%; animation-delay:0s;">Happy Birthday Rayvee 🎉</div>
+<div class="floating-msg" style="left:25%; animation-delay:2s;">Wish you success ✨</div>
+<div class="floating-msg" style="left:45%; animation-delay:4s;">Stay happy always 💙</div>
+<div class="floating-msg" style="left:65%; animation-delay:1s;">More blessings 🎂</div>
+<div class="floating-msg" style="left:80%; animation-delay:3s;">Enjoy your day 🎈</div>
+
+<div class="container">
+
+<h1>🎉 Happy Birthday 🎉</h1>
+<h2>Rayvee Villarias</h2>
+<p>June 11</p>
+
+<div class="cake">🎂</div>
+
+<p>Enjoy your special day under fireworks ✨</p>
+
+<button id="btn1">🎆 Celebrate</button>
+<button id="btn2">🎵 Music</button>
+
+<div class="countdown">
+<div><span id="d">0</span><p>Days</p></div>
+<div><span id="h">0</span><p>Hours</p></div>
+<div><span id="m">0</span><p>Min</p></div>
+<div><span id="s">0</span><p>Sec</p></div>
+</div>
+
+<div class="gallery-title">📸 Memories Gallery</div>
+
+<div class="gallery">
+<div class="photo"><img src="pic1.png"></div>
+<div class="photo"><img src="pic2.png"></div>
+<div class="photo"><img src="pic3.png"></div>
+<div class="photo"><img src="pic4.png"></div>
+</div>
+
+</div>
+
+<div class="popup" id="popup">
+<img id="popupImg">
+</div>
+
+<audio id="music" loop>
+<source src="sound.mp3.mp3">
+</audio>
+
+<script>
+
+/* FIREWORKS */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function Firework(x,y){
+this.x=x;
+this.y=y;
+this.radius=Math.random()*2+1;
+this.color=`hsl(${Math.random()*360},100%,60%)`;
+this.vx=(Math.random()-0.5)*6;
+this.vy=(Math.random()-0.5)*6;
+this.life=100;
+}
+
+function explode(){
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+
+for(let i=0;i<50;i++){
+particles.push(new Firework(x,y));
+}
+}
+
+function animate(){
+requestAnimationFrame(animate);
+ctx.fillStyle="rgba(0,0,0,0.15)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+p.x+=p.vx;
+p.y+=p.vy;
+p.life--;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+ctx.fillStyle=p.color;
+ctx.fill();
+
+if(p.life<=0) particles.splice(i,1);
+});
+}
+
+animate();
+
+/* BUTTONS */
+document.getElementById("btn1").onclick=()=>{
+explode();
+confetti({particleCount:200,spread:160});
+};
+
+document.getElementById("btn2").onclick=()=>{
+let music=document.getElementById("music");
+music.paused?music.play():music.pause();
+};
+
+/* COUNTDOWN */
+let target=new Date("June 11, 2027 00:00:00").getTime();
+
+setInterval(()=>{
+let now=new Date().getTime();
+let diff=target-now;
+
+document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
+document.getElementById("h").innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+document.getElementById("m").innerText=Math.floor((diff%(1000*60*60))/(1000*60));
+document.getElementById("s").innerText=Math.floor((diff%(1000*60))/1000);
+},1000);
+
+/* AUTO FIREWORKS */
+setInterval(explode,2500);
+
+/* POPUP */
+const photos=document.querySelectorAll(".photo img");
+const popup=document.getElementById("popup");
+const popupImg=document.getElementById("popupImg");
+
+photos.forEach(img=>{
+img.onclick=()=>{
+popup.style.display="flex";
+popupImg.src=img.src;
+}
+});
+
+popup.onclick=()=>{
+popup.style.display="none";
+}
+
+</script>
+
+</body>
+</html>
